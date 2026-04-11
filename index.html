@@ -3,85 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProLuggageParts | 90% Compatibility Luggage Accessories & OEM Service</title>
-    <meta name="description" content="Global supplier for high-quality luggage replacement parts. 90% compatibility for Samsonite, Rimowa, and Tumi. Fast delivery and custom OEM/ODM services.">
+    <title>ProLuggageParts | Precision Accessories & OEM Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .bg-tech-gray { background-color: #F5F5F5; }
         .text-geek-red { color: #E30613; }
         .bg-geek-red { background-color: #E30613; }
-        .bg-industrial-black { background-color: #1A1A1A; }
+        /* 视频背景容器 */
+        .video-container {
+            position: relative;
+            height: 80vh; /* 占据屏幕 80% 高度 */
+            overflow: hidden;
+        }
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+        /* 视频上方的文字层 */
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩 */
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
 
     <!-- Navigation -->
-    <nav class="border-b border-gray-200 py-4 px-6 flex justify-between items-center sticky top-0 bg-white z-50">
-        <div class="flex items-center">
-            <img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10">
-        </div>
+    <nav class="border-b border-gray-200 py-4 px-6 flex justify-between items-center bg-white sticky top-0 z-50">
+        <img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10">
         <div class="hidden md:flex space-x-8 font-medium">
             <a href="#" class="hover:text-geek-red transition">Home</a>
             <a href="#" class="hover:text-geek-red transition">Parts Finder</a>
-            <a href="#" class="hover:text-geek-red transition">OEM/ODM Service</a>
+            <a href="#" class="hover:text-geek-red transition">OEM/ODM</a>
             <a href="#" class="hover:text-geek-red transition">Wholesale</a>
-            <a href="#" class="hover:text-geek-red transition">Support</a>
         </div>
-        <div>
-            <a href="mailto:contact@proluggageparts.com" class="bg-geek-red text-white px-5 py-2 rounded-md font-bold hover:bg-red-700 transition">Get a Quote</a>
-        </div>
+        <a href="mailto:contact@proluggageparts.com" class="bg-geek-red text-white px-5 py-2 rounded font-bold">Inquiry</a>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative bg-industrial-black py-24 px-6 text-center overflow-hidden">
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
-                Precision Parts for <span class="text-geek-red">Global Luggage</span> Brands
+    <!-- Hero Section with Video -->
+    <div class="video-container">
+        <!-- 请确保你的视频文件名叫 hero-video.mp4，并上传到了 GitHub -->
+        <video autoplay muted loop playsinline poster="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png">
+            <source src="hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="video-overlay">
+            <h1 class="text-white text-4xl md:text-6xl font-extrabold mb-4 uppercase tracking-tighter">
+                Next-Gen <span class="text-geek-red">Luggage Hardware</span>
             </h1>
-            <p class="text-xl text-gray-400 mb-10 leading-relaxed">
-                90% Compatibility for Samsonite, Rimowa, and Tumi. <br> Large Inventory. 24-Hour Global Dispatch.
+            <p class="text-gray-200 text-lg md:text-xl max-w-2xl mb-8">
+                90% Compatibility. 24-Hour Dispatch. <br>The Industry Standard for Suitcase Repair & Manufacturing.
             </p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-                <a href="#" class="bg-geek-red text-white px-8 py-4 rounded-md text-lg font-bold">Search Replacement Parts</a>
-                <a href="#" class="border border-white text-white px-8 py-4 rounded-md text-lg font-bold hover:bg-white hover:text-black transition">Explore OEM Service</a>
+            <div class="flex space-x-4">
+                <a href="#" class="bg-geek-red text-white px-8 py-4 rounded font-bold hover:scale-105 transition transform">View Catalog</a>
+                <a href="#" class="bg-white text-black px-8 py-4 rounded font-bold hover:bg-gray-200 transition">Custom Quote</a>
             </div>
         </div>
-        <!-- Background Decor -->
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <img src="https://sc02.alicdn.com/kf/A0227474a10564fc9aaeec6ef6d266b353.png" alt="Warehouse Background" class="w-full h-full object-cover">
-        </div>
-    </header>
+    </div>
 
-    <!-- Core Features -->
-    <section class="py-20 px-6 bg-tech-gray">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12">
-            <div class="text-center">
-                <div class="bg-white p-8 rounded-lg shadow-sm border-b-4 border-geek-red">
-                    <h3 class="text-xl font-bold mb-4">90% Compatibility</h3>
-                    <p class="text-gray-600">Our universal designs fit almost all major luggage brands, reducing your inventory costs.</p>
-                </div>
+    <!-- Features -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+            <div class="bg-white p-10 shadow-sm rounded border-t-4 border-geek-red">
+                <h3 class="text-2xl font-bold mb-2">High Precision</h3>
+                <p class="text-gray-500">Engineered for Rimowa, Samsonite, and Tumi standards.</p>
             </div>
-            <div class="text-center">
-                <div class="bg-white p-8 rounded-lg shadow-sm border-b-4 border-geek-red">
-                    <h3 class="text-xl font-bold mb-4">Fast Dispatch</h3>
-                    <p class="text-gray-600">With 50,000+ units in stock, we guarantee shipping within 24 hours of inquiry confirmation.</p>
-                </div>
+            <div class="bg-white p-10 shadow-sm rounded border-t-4 border-geek-red">
+                <h3 class="text-2xl font-bold mb-2">In-Stock Supply</h3>
+                <p class="text-gray-500">50,000+ units ready for immediate global shipping.</p>
             </div>
-            <div class="text-center">
-                <div class="bg-white p-8 rounded-lg shadow-sm border-b-4 border-geek-red">
-                    <h3 class="text-xl font-bold mb-4">OEM/ODM Ready</h3>
-                    <p class="text-gray-600">Full molding service and custom laser-engraved logos starting from small batches.</p>
-                </div>
+            <div class="bg-white p-10 shadow-sm rounded border-t-4 border-geek-red">
+                <h3 class="text-2xl font-bold mb-2">OEM / ODM</h3>
+                <p class="text-gray-500">Custom molds and laser-engraving for your private label.</p>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-10 px-6 text-center">
-        <p class="text-gray-500">&copy; 2026 ProLuggageParts (K-ROOP). All rights reserved.</p>
-    </footer>
 
 </body>
 </html>
