@@ -61,7 +61,7 @@
     <div class="video-container">
         <!-- 请确保你的视频文件名叫 hero-video.mp4，并上传到了 GitHub -->
         <video autoplay muted loop playsinline poster="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png">
-            <source src="hero-video.mp4" type="video/mp4">
+            <source src="hero-video.mp4.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
