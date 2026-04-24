@@ -57,17 +57,35 @@
     <!-- SKU Grid -->
     <section class="py-16 px-6">
         <div class="max-w-7xl mx-auto">
+            <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
                 <p class="text-gray-500 text-sm">Showing <span class="font-bold text-gray-900">all products</span></p>
                 <div class="flex gap-2">
-                    <button class="px-4 py-2 bg-geek-red text-white text-sm font-bold rounded">All</button>
-                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Single Tube</button>
-                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Double Tube</button>
+                    <button id="filter-all" class="px-4 py-2 bg-geek-red text-white text-sm font-bold rounded">All</button>
+                    <button id="filter-handle" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Handle</button>
+                    <button id="filter-rod" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Aluminum Pull Rod</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="sku-grid"></div>
+            <!-- Handle Section -->
+            <div id="section-handle">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Handle
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="handle-grid"></div>
+            </div>
 
+            <!-- Aluminum Pull Rod Section -->
+            <div id="section-rod" class="mt-16">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Aluminum Pull Rod
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="rod-grid"></div>
+            </div>
+
+            <!-- CTA -->
             <div class="mt-16 text-center bg-white rounded-xl p-8 shadow-lg">
                 <h3 class="text-xl font-bold mb-2">Can't find the right handle?</h3>
                 <p class="text-gray-500 mb-6">Upload a photo of your handle and we'll identify the exact model for you.</p>
@@ -103,13 +121,18 @@
             });
         }
 
-        const skuItems = [
+        // Handle products
+        const handleItems = [
             { id: 'TH-001', name: 'Standard Telescopic Handle', model: 'TH-STD-01', price: 'Contact for price', image: '' },
             { id: 'TH-002', name: 'Adjustable Length Handle', model: 'TH-ADJ-02', price: 'Contact for price', image: '' },
             { id: 'TH-003', name: 'Ergonomic Grip Handle', model: 'TH-ERG-03', price: 'Contact for price', image: '' },
             { id: 'TH-004', name: 'Locking Mechanism Handle', model: 'TH-LOCK-04', price: 'Contact for price', image: '' },
             { id: 'TH-005', name: 'Aluminum Alloy Handle', model: 'TH-AA-05', price: 'Contact for price', image: '' },
             { id: 'TH-006', name: 'Plastic Grip Handle', model: 'TH-PG-06', price: 'Contact for price', image: '' },
+        ];
+
+        // Aluminum Pull Rod products
+        const rodItems = [
             { id: 'TH-007', name: 'Double Tube Handle', model: 'TH-DT-07', price: 'Contact for price', image: '' },
             { id: 'TH-008', name: 'Single Tube Handle', model: 'TH-ST-08', price: 'Contact for price', image: '' },
             { id: 'TH-009', name: 'Soft Touch Handle', model: 'TH-ST-09', price: 'Contact for price', image: '' },
@@ -118,16 +141,15 @@
             { id: 'TH-012', name: 'Marine Grade Handle', model: 'TH-MG-12', price: 'Contact for price', image: '' },
         ];
 
-        function renderSKUGrid() {
-            const grid = document.getElementById('sku-grid');
-            const placeholderSvg = `<svg class="w-full h-full object-contain p-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" fill="#f3f4f6"/>
-                <rect x="35" y="20" width="30" height="60" rx="3" fill="#d1d5db"/>
-                <rect x="40" y="25" width="20" height="10" fill="#9ca3af"/>
-                <text x="50" y="95" text-anchor="middle" font-size="7" fill="#6b7280">Image coming soon</text>
-            </svg>`;
+        const placeholderSvg = `<svg class="w-full h-full object-contain p-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#f3f4f6"/>
+            <rect x="35" y="20" width="30" height="60" rx="3" fill="#d1d5db"/>
+            <rect x="40" y="25" width="20" height="10" fill="#9ca3af"/>
+            <text x="50" y="95" text-anchor="middle" font-size="7" fill="#6b7280">Image coming soon</text>
+        </svg>`;
 
-            grid.innerHTML = skuItems.map(item => `
+        function renderCard(item) {
+            return `
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
                     <div class="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
                         ${item.image
@@ -142,10 +164,49 @@
                         <p class="text-geek-red font-bold text-sm">${item.price}</p>
                     </div>
                 </div>
-            `).join('');
+            `;
         }
 
-        renderSKUGrid();
+        function renderGrids() {
+            document.getElementById('handle-grid').innerHTML = handleItems.map(renderCard).join('');
+            document.getElementById('rod-grid').innerHTML = rodItems.map(renderCard).join('');
+        }
+
+        // Filter functionality
+        const filterAll = document.getElementById('filter-all');
+        const filterHandle = document.getElementById('filter-handle');
+        const filterRod = document.getElementById('filter-rod');
+        const sectionHandle = document.getElementById('section-handle');
+        const sectionRod = document.getElementById('section-rod');
+
+        function setActive(btn) {
+            [filterAll, filterHandle, filterRod].forEach(b => {
+                b.classList.remove('bg-geek-red', 'text-white');
+                b.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            });
+            btn.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            btn.classList.add('bg-geek-red', 'text-white');
+        }
+
+        filterAll.addEventListener('click', () => {
+            setActive(filterAll);
+            sectionHandle.style.display = 'block';
+            sectionRod.style.display = 'block';
+        });
+
+        filterHandle.addEventListener('click', () => {
+            setActive(filterHandle);
+            sectionHandle.style.display = 'block';
+            sectionRod.style.display = 'none';
+        });
+
+        filterRod.addEventListener('click', () => {
+            setActive(filterRod);
+            sectionHandle.style.display = 'none';
+            sectionRod.style.display = 'block';
+        });
+
+        renderGrids();
     </script>
 </body>
 </html>
