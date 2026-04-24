@@ -4,17 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProLuggageParts | Guangzhou Fanfu Travel Goods Co., Ltd.</title>
+    <meta name="description" content="Leading global supplier of precision-engineered luggage parts. 3000+ SQM facility, 50000+ units in stock, serving 40+ countries. OEM/ODM available.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .text-geek-red { color: #E30613; }
         .bg-geek-red { background-color: #E30613; }
         .bg-industrial-black { background-color: #0F0F0F; }
+        .border-geek-red { border-color: #E30613; }
+
+        /* Video container */
         .video-container { position: relative; height: 95vh; overflow: hidden; }
         .video-container video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); object-fit: cover; z-index: 1; }
         .video-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2), rgba(0,0,0,0.7)); z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+
+        /* Glass card */
         .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+        /* Video loading state */
+        .video-loading { position: absolute; inset: 0; background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%); z-index: 0; }
+        .video-loading::after { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #E30613; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animation-delay-1 { animation-delay: 0.1s; }
+        .animation-delay-2 { animation-delay: 0.2s; }
+        .animation-delay-3 { animation-delay: 0.3s; }
+        .animation-delay-4 { animation-delay: 0.4s; }
+        .animation-delay-5 { animation-delay: 0.5s; }
+
+        /* Brand hover effect */
+        .brand-item { transition: all 0.3s ease; }
+        .brand-item:hover { color: #E30613; transform: scale(1.05); }
+
+        /* Category card hover */
+        .category-card { transition: all 0.3s ease; }
+        .category-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .category-card:hover img { transform: scale(1.1); }
+        .category-card img { transition: transform 0.5s ease; }
+
+        /* Trust badge */
+        .trust-badge { transition: all 0.3s ease; }
+        .trust-badge:hover { transform: scale(1.05); background: #f9fafb; }
+
+        /* Testimonial card */
+        .testimonial-card { transition: all 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        /* CTA button glow */
+        .cta-glow { box-shadow: 0 0 30px rgba(227, 6, 19, 0.4); }
+        .cta-glow:hover { box-shadow: 0 0 50px rgba(227, 6, 19, 0.6); }
     </style>
 </head>
 <body class="bg-white text-gray-900 leading-tight">
@@ -33,31 +78,117 @@
             <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
         </div>
         <a href="mailto:contact@proluggageparts.com" class="bg-geek-red text-white px-8 py-3 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-black transition shadow-lg shadow-red-900/20">Direct Quote</a>
+        <!-- Mobile menu button -->
+        <button class="md:hidden p-2" id="mobile-menu-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden bg-white border-b border-gray-100 px-6 py-4" id="mobile-menu">
+        <div class="flex flex-col space-y-4 font-black uppercase text-[11px] tracking-[0.2em]">
+            <a href="index.html" class="text-geek-red">Home</a>
+            <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
+            <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
+            <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <div class="video-container">
-        <video autoplay muted loop playsinline poster="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png">
+        <!-- Loading state -->
+        <div class="video-loading" id="video-loading"></div>
+        <video autoplay muted loop playsinline poster="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png" onloadeddata="document.getElementById('video-loading').style.display='none'">
             <source src="hero-video.mp4" type="video/mp4">
         </video>
         <div class="video-overlay">
             <div class="max-w-6xl">
-                <p class="text-geek-red font-black tracking-[0.4em] uppercase mb-6 text-sm">Industrial Precision Excellence</p>
-                <h1 class="text-white text-6xl md:text-9xl font-black mb-8 uppercase leading-[0.85] tracking-tighter">
+                <p class="text-geek-red font-black tracking-[0.4em] uppercase mb-6 text-sm opacity-0 animate-fade-in-up">Industrial Precision Excellence</p>
+                <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 uppercase leading-[0.85] tracking-tighter opacity-0 animate-fade-in-up animation-delay-1">
                     HARDWARE <br>FOR THE <span class="text-geek-red">BOLD</span>
                 </h1>
-                <p class="text-gray-300 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-medium tracking-tight">
-                    Powering the global repair industry with precision-engineered components. <br>90% Compatibility. High-End Durability. 24H Global Logistics.
+                <p class="text-gray-300 text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto mb-12 font-medium tracking-tight opacity-0 animate-fade-in-up animation-delay-2">
+                    Powering the global repair industry with precision-engineered components. <br class="hidden md:block">90% Compatibility. High-End Durability. 24H Global Logistics.
                 </p>
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 justify-center items-center">
-                    <a href="parts-finder.html" class="bg-geek-red text-white px-12 py-6 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-2xl">Search Catalog</a>
-                    <a href="oem-odm.html" class="border-2 border-white text-white px-12 py-6 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-black transition">Custom Solutions</a>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-center items-center opacity-0 animate-fade-in-up animation-delay-3">
+                    <a href="parts-finder.html" class="bg-geek-red text-white px-10 md:px-12 py-5 md:py-6 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-2xl cta-glow">Search Catalog</a>
+                    <a href="oem-odm.html" class="border-2 border-white text-white px-10 md:px-12 py-5 md:py-6 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-black transition">Custom Solutions</a>
                 </div>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-fade-in-up animation-delay-5">
+            <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
+                <div class="w-1 h-2 bg-white/50 rounded-full animate-bounce"></div>
             </div>
         </div>
     </div>
 
-    <!-- Company Identity Section (NEW:广州泛富背景) -->
+    <!-- Quick Categories Section -->
+    <section class="py-20 bg-gray-50 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-geek-red font-black tracking-widest uppercase mb-4 text-xs">Product Categories</p>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase">Find What You Need</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Spinner Wheels -->
+                <a href="parts-finder.html" class="category-card bg-white rounded-lg overflow-hidden shadow-sm">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        <img src="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png" alt="Spinner Wheels" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-black uppercase text-sm tracking-wide">Spinner Wheels</h3>
+                        <p class="text-gray-400 text-xs mt-1">200+ Models</p>
+                    </div>
+                </a>
+                <!-- Telescopic Handles -->
+                <a href="parts-finder.html" class="category-card bg-white rounded-lg overflow-hidden shadow-sm">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        <img src="https://sc02.alicdn.com/kf/A31d66204ced74f5c8b4bbe2553e4c4a7M.png" alt="Telescopic Handles" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-black uppercase text-sm tracking-wide">Telescopic Handles</h3>
+                        <p class="text-gray-400 text-xs mt-1">150+ Models</p>
+                    </div>
+                </a>
+                <!-- Side Handles -->
+                <a href="parts-finder.html" class="category-card bg-white rounded-lg overflow-hidden shadow-sm">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        <img src="https://sc02.alicdn.com/kf/A66db66986a984a269c9c25357ed81c8aU.png" alt="Side Handles" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-black uppercase text-sm tracking-wide">Side Handles</h3>
+                        <p class="text-gray-400 text-xs mt-1">80+ Models</p>
+                    </div>
+                </a>
+                <!-- TSA Locks -->
+                <a href="parts-finder.html" class="category-card bg-white rounded-lg overflow-hidden shadow-sm">
+                    <div class="aspect-square overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-black uppercase text-sm tracking-wide">TSA Locks</h3>
+                        <p class="text-gray-400 text-xs mt-1">50+ Models</p>
+                    </div>
+                </a>
+            </div>
+            <div class="text-center mt-10">
+                <a href="parts-finder.html" class="inline-flex items-center gap-2 text-geek-red font-black text-sm uppercase tracking-widest hover:gap-4 transition-all">
+                    View Full Catalog
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Identity Section -->
     <section class="py-24 bg-industrial-black px-8">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             <div class="lg:w-1/2">
@@ -70,17 +201,17 @@
                     <p>Operating a 3,000+ SQM advanced facility, we bridge the gap between complex engineering and mass-market reliability, serving repair networks and premium brands across 40+ countries.</p>
                 </div>
                 <div class="grid grid-cols-3 gap-8 mt-12">
-                    <div>
+                    <div class="text-center p-4 glass-card rounded">
                         <p class="text-white text-3xl font-black">3,000+</p>
-                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">SQM Factory</p>
+                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mt-2">SQM Factory</p>
                     </div>
-                    <div>
+                    <div class="text-center p-4 glass-card rounded">
                         <p class="text-white text-3xl font-black">50,000</p>
-                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Units In-Stock</p>
+                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mt-2">Units In-Stock</p>
                     </div>
-                    <div>
+                    <div class="text-center p-4 glass-card rounded">
                         <p class="text-white text-3xl font-black">40+</p>
-                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Global Markets</p>
+                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mt-2">Global Markets</p>
                     </div>
                 </div>
             </div>
@@ -91,54 +222,218 @@
         </div>
     </section>
 
-    <!-- Brand Matrix -->
-    <section class="py-24 bg-white px-8">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-[11px] font-black tracking-[0.5em] uppercase text-gray-400 mb-16">The Engine of Industry Leaders</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-16 items-center grayscale opacity-40">
-                <span class="text-2xl font-black italic tracking-tighter">RIMOWA</span>
-                <span class="text-2xl font-black tracking-tighter">Samsonite</span>
-                <span class="text-2xl font-black italic tracking-tighter uppercase">TUMI</span>
-                <span class="text-2xl font-black tracking-tighter uppercase">Tourister</span>
-                <span class="text-2xl font-black tracking-tighter">DELSEY</span>
-                <span class="text-2xl font-black italic tracking-tighter">Travelpro</span>
+    <!-- Trust Badges Section -->
+    <section class="py-16 bg-white border-b border-gray-100 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="trust-badge flex items-center gap-4 p-4 rounded-lg border border-gray-100">
+                    <div class="w-12 h-12 bg-geek-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-geek-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-black text-sm">ISO 9001</p>
+                        <p class="text-gray-400 text-xs">Certified Quality</p>
+                    </div>
+                </div>
+                <div class="trust-badge flex items-center gap-4 p-4 rounded-lg border border-gray-100">
+                    <div class="w-12 h-12 bg-geek-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-geek-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-black text-sm">40+ Countries</p>
+                        <p class="text-gray-400 text-xs">Global Reach</p>
+                    </div>
+                </div>
+                <div class="trust-badge flex items-center gap-4 p-4 rounded-lg border border-gray-100">
+                    <div class="w-12 h-12 bg-geek-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-geek-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-black text-sm">24H Shipping</p>
+                        <p class="text-gray-400 text-xs">Fast Logistics</p>
+                    </div>
+                </div>
+                <div class="trust-badge flex items-center gap-4 p-4 rounded-lg border border-gray-100">
+                    <div class="w-12 h-12 bg-geek-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-geek-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-black text-sm">Tech Support</p>
+                        <p class="text-gray-400 text-xs">Part Identification</p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Brand Matrix -->
+    <section class="py-24 bg-gray-50 px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-[11px] font-black tracking-[0.5em] uppercase text-gray-400 mb-16">Trusted by Industry Leaders</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+                <span class="brand-item text-2xl font-black italic tracking-tighter text-gray-500">RIMOWA</span>
+                <span class="brand-item text-2xl font-black tracking-tighter text-gray-500">Samsonite</span>
+                <span class="brand-item text-2xl font-black italic tracking-tighter uppercase text-gray-500">TUMI</span>
+                <span class="brand-item text-2xl font-black tracking-tighter uppercase text-gray-500">Tourister</span>
+                <span class="brand-item text-2xl font-black tracking-tighter text-gray-500">DELSEY</span>
+                <span class="brand-item text-2xl font-black italic tracking-tighter text-gray-500">Travelpro</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-white px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-geek-red font-black tracking-widest uppercase mb-4 text-xs">What Our Partners Say</p>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase">Global Partner Testimonials</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"ProLuggageParts has transformed our repair business. Their wheel compatibility is unmatched, and the 24-hour shipping keeps our customers happy."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-white text-sm">JM</div>
+                        <div>
+                            <p class="font-bold text-sm">John Martinez</p>
+                            <p class="text-gray-400 text-xs">Luggage Repair Shop, Miami</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"We've sourced handles from multiple suppliers, but K-ROOP's quality consistency is remarkable. Our private label line has never had fewer returns."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-white text-sm">SK</div>
+                        <div>
+                            <p class="font-bold text-sm">Sarah Kim</p>
+                            <p class="text-gray-400 text-xs">Brand Manager, Tourister Asia</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-lg">
+                    <div class="flex gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"The OEM team understood our custom handle requirements perfectly. 7 days for samples, flawless mass production. Exactly what we needed."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center font-bold text-white text-sm">ML</div>
+                        <div>
+                            <p class="font-bold text-sm">Marco Laurent</p>
+                            <p class="text-gray-400 text-xs">Procurement Director, DELSEY Europe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-geek-red px-8">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">Ready to Partner with Us?</h2>
+            <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">Get a personalized quote within 4 hours. Our team is ready to support your luggage parts needs.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:contact@proluggageparts.com" class="bg-white text-geek-red px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-xl">Get Free Quote</a>
+                <a href="parts-finder.html" class="border-2 border-white text-white px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-geek-red transition">Browse Catalog</a>
+            </div>
+            <p class="mt-8 text-white/60 text-sm font-medium">Average Response Time: <span class="text-white font-bold">Under 4 Hours</span></p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-industrial-black pt-20 pb-10 px-8 text-white border-t border-gray-800">
         <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-16 mb-20">
-                <div>
-                    <img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10 mb-8 brightness-150">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1">
+                    <img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10 mb-6 brightness-150">
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Precision engineering for the world’s most demanding travel environments. 
+                        Precision engineering for the world's most demanding travel environments.
                         The global standard in luggage repair and manufacturing supply.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-8 text-geek-red">Legal Entity</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed font-bold">
-                        Guangzhou Fanfu Travel Goods Co., Ltd.<br>
-                        Industrial Zone, Guangzhou, Guangdong, China
-                    </p>
+                    <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-6 text-geek-red">Products</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="parts-finder.html" class="hover:text-white transition">Spinner Wheels</a></li>
+                        <li><a href="parts-finder.html" class="hover:text-white transition">Telescopic Handles</a></li>
+                        <li><a href="parts-finder.html" class="hover:text-white transition">Side & Top Handles</a></li>
+                        <li><a href="parts-finder.html" class="hover:text-white transition">TSA Locks</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-8 text-geek-red">Global Inquiries</h4>
-                    <a href="mailto:contact@proluggageparts.com" class="text-white text-lg font-black underline decoration-geek-red underline-offset-8">contact@proluggageparts.com</a>
+                    <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-6 text-geek-red">Services</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="oem-odm.html" class="hover:text-white transition">OEM/ODM Custom</a></li>
+                        <li><a href="wholesale.html" class="hover:text-white transition">Wholesale Pricing</a></li>
+                        <li><a href="mailto:contact@proluggageparts.com" class="hover:text-white transition">Technical Support</a></li>
+                        <li><a href="mailto:contact@proluggageparts.com" class="hover:text-white transition">Part Identification</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-6 text-geek-red">Contact</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="mailto:contact@proluggageparts.com" class="hover:text-white transition">contact@proluggageparts.com</a></li>
+                        <li class="text-gray-500">Guangzhou Fanfu Travel Goods Co., Ltd.</li>
+                        <li class="text-gray-500">Industrial Zone, Guangzhou, Guangdong, China</li>
+                    </ul>
                 </div>
             </div>
             <div class="border-t border-gray-900 pt-10 flex flex-col md:flex-row justify-between items-center text-[10px] font-black tracking-[0.4em] text-gray-600 uppercase">
-                <div>&copy; 2026 Guangzhou Fanfu Travel Goods Co., Ltd.</div>
+                <div>&copy; 2026 Guangzhou Fanfu Travel Goods Co., Ltd. All rights reserved.</div>
                 <div class="flex space-x-12 mt-6 md:mt-0">
                     <a href="#" class="hover:text-white transition">ISO Standards</a>
-                    <a href="#" class="hover:text-white transition">Privacy</a>
-                    <a href="#" class="hover:text-white transition">Terms</a>
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Trigger animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.animate-fade-in-up').forEach(function(el) {
+                el.style.opacity = '0';
+            });
+            setTimeout(function() {
+                document.querySelectorAll('.animate-fade-in-up').forEach(function(el) {
+                    el.style.opacity = '';
+                });
+            }, 100);
+        });
+    </script>
 </body>
 </html>
