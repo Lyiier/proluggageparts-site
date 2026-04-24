@@ -57,23 +57,52 @@
     <!-- SKU Grid -->
     <section class="py-16 px-6">
         <div class="max-w-7xl mx-auto">
-            <!-- Filter/Sort (Optional) -->
-            <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
-                <p class="text-gray-500 text-sm">Showing <span class="font-bold text-gray-900">all products</span></p>
-                <div class="flex gap-2">
-                    <button class="px-4 py-2 bg-geek-red text-white text-sm font-bold rounded">All</button>
-                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">4-Wheel</button>
-                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">2-Wheel</button>
-                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Front Wheel</button>
-                </div>
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button id="filter-all" class="px-4 py-2 bg-geek-red text-white text-sm font-bold rounded">All</button>
+                <button id="filter-single" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Single Wheel</button>
+                <button id="filter-universal" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Universal Wheel</button>
+                <button id="filter-directional" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Directional Wheel</button>
+                <button id="filter-oxford" class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Oxford Suitcase Wheel</button>
             </div>
 
-            <!-- Product Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="sku-grid">
-                <!-- SKU items will be inserted here -->
+            <!-- Single Wheel Section -->
+            <div id="section-single">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Single Wheel
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="single-grid"></div>
             </div>
 
-            <!-- Contact CTA -->
+            <!-- Universal Wheel Section -->
+            <div id="section-universal" class="mt-16">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Universal Wheel
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="universal-grid"></div>
+            </div>
+
+            <!-- Directional Wheel Section -->
+            <div id="section-directional" class="mt-16">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Directional Wheel
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="directional-grid"></div>
+            </div>
+
+            <!-- Oxford Suitcase Wheel Section -->
+            <div id="section-oxford" class="mt-16">
+                <h2 class="text-xl font-black uppercase mb-6 flex items-center gap-3">
+                    <span class="w-8 h-1 bg-geek-red"></span>
+                    Oxford Suitcase Wheel
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="oxford-grid"></div>
+            </div>
+
+            <!-- CTA -->
             <div class="mt-16 text-center bg-white rounded-xl p-8 shadow-lg">
                 <h3 class="text-xl font-bold mb-2">Can't find the right wheel?</h3>
                 <p class="text-gray-500 mb-6">Upload a photo of your wheel and we'll identify the exact model for you.</p>
@@ -110,34 +139,44 @@
             });
         }
 
-        // SKU data - Replace image URLs with your actual product images
-        const skuItems = [
-            { id: 'SW-001', name: 'Universal 4-Wheel Caster', model: 'SW-360°-01', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/001.jpg' },
-            { id: 'SW-002', name: 'Silent Spinner Wheel', model: 'SW-SILENT-02', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/002.jpg' },
-            { id: 'SW-003', name: 'Heavy Duty Caster', model: 'SW-HD-03', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/003.jpg' },
-            { id: 'SW-004', name: 'Mini Spinner Wheel', model: 'SW-MINI-04', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/004.jpg' },
-            { id: 'SW-005', name: 'Double Bearing Wheel', model: 'SW-DB-05', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/005.jpg' },
-            { id: 'SW-006', name: 'Rubber Edge Caster', model: 'SW-RB-06', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/006.jpg' },
-            { id: 'SW-007', name: 'Aluminum Alloy Wheel', model: 'SW-AA-07', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/007.jpg' },
-            { id: 'SW-008', name: 'ABS Plastic Wheel', model: 'SW-ABS-08', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/008.jpg' },
-            { id: 'SW-009', name: 'Retractable Caster', model: 'SW-RET-09', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/009.jpg' },
-            { id: 'SW-010', name: 'Fixed Direction Wheel', model: 'SW-FIX-10', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/010.jpg' },
-            { id: 'SW-011', name: 'PU Foam Wheel', model: 'SW-PU-11', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/011.jpg' },
-            { id: 'SW-012', name: 'Inline Skate Wheel', model: 'SW-SKATE-12', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/012.jpg' },
+        // Placeholder image
+        const placeholderSvg = `<svg class="w-full h-full object-contain p-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="#f3f4f6"/>
+            <circle cx="50" cy="50" r="30" fill="#d1d5db"/>
+            <circle cx="50" cy="50" r="15" fill="#9ca3af"/>
+            <text x="50" y="105" text-anchor="middle" font-size="8" fill="#6b7280">Image coming soon</text>
+        </svg>`;
+
+        // Single Wheel products
+        const singleItems = [
+            { id: 'SW-001', name: 'Single Wheel 1', model: 'SW-S-01', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/001.jpg' },
+            { id: 'SW-002', name: 'Single Wheel 2', model: 'SW-S-02', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/002.jpg' },
+            { id: 'SW-003', name: 'Single Wheel 3', model: 'SW-S-03', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/003.jpg' },
         ];
 
-        function renderSKUGrid() {
-            const grid = document.getElementById('sku-grid');
+        // Universal Wheel products
+        const universalItems = [
+            { id: 'SW-004', name: 'Universal Wheel 1', model: 'SW-U-04', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/004.jpg' },
+            { id: 'SW-005', name: 'Universal Wheel 2', model: 'SW-U-05', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/005.jpg' },
+            { id: 'SW-006', name: 'Universal Wheel 3', model: 'SW-U-06', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/006.jpg' },
+        ];
 
-            // Placeholder image
-            const placeholderSvg = `<svg class="w-full h-full object-contain p-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" fill="#f3f4f6"/>
-                <circle cx="50" cy="50" r="30" fill="#d1d5db"/>
-                <circle cx="50" cy="50" r="15" fill="#9ca3af"/>
-                <text x="50" y="105" text-anchor="middle" font-size="8" fill="#6b7280">Image coming soon</text>
-            </svg>`;
+        // Directional Wheel products
+        const directionalItems = [
+            { id: 'SW-007', name: 'Directional Wheel 1', model: 'SW-D-07', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/007.jpg' },
+            { id: 'SW-008', name: 'Directional Wheel 2', model: 'SW-D-08', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/008.jpg' },
+            { id: 'SW-009', name: 'Directional Wheel 3', model: 'SW-D-09', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/009.jpg' },
+        ];
 
-            grid.innerHTML = skuItems.map(item => `
+        // Oxford Suitcase Wheel products
+        const oxfordItems = [
+            { id: 'SW-010', name: 'Oxford Wheel 1', model: 'SW-O-10', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/010.jpg' },
+            { id: 'SW-011', name: 'Oxford Wheel 2', model: 'SW-O-11', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/011.jpg' },
+            { id: 'SW-012', name: 'Oxford Wheel 3', model: 'SW-O-12', price: 'Contact for price', image: 'https://www永久.com/a/images/spinner-wheels/012.jpg' },
+        ];
+
+        function renderCard(item) {
+            return `
                 <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
                     <div class="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
                         ${item.image
@@ -152,10 +191,77 @@
                         <p class="text-geek-red font-bold text-sm">${item.price}</p>
                     </div>
                 </div>
-            `).join('');
+            `;
         }
 
-        renderSKUGrid();
+        function renderGrids() {
+            document.getElementById('single-grid').innerHTML = singleItems.map(renderCard).join('');
+            document.getElementById('universal-grid').innerHTML = universalItems.map(renderCard).join('');
+            document.getElementById('directional-grid').innerHTML = directionalItems.map(renderCard).join('');
+            document.getElementById('oxford-grid').innerHTML = oxfordItems.map(renderCard).join('');
+        }
+
+        // Filter functionality
+        const filterAll = document.getElementById('filter-all');
+        const filterSingle = document.getElementById('filter-single');
+        const filterUniversal = document.getElementById('filter-universal');
+        const filterDirectional = document.getElementById('filter-directional');
+        const filterOxford = document.getElementById('filter-oxford');
+
+        const sectionSingle = document.getElementById('section-single');
+        const sectionUniversal = document.getElementById('section-universal');
+        const sectionDirectional = document.getElementById('section-directional');
+        const sectionOxford = document.getElementById('section-oxford');
+
+        function setActive(btn) {
+            [filterAll, filterSingle, filterUniversal, filterDirectional, filterOxford].forEach(b => {
+                b.classList.remove('bg-geek-red', 'text-white');
+                b.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            });
+            btn.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-600');
+            btn.classList.add('bg-geek-red', 'text-white');
+        }
+
+        function hideAllSections() {
+            sectionSingle.style.display = 'none';
+            sectionUniversal.style.display = 'none';
+            sectionDirectional.style.display = 'none';
+            sectionOxford.style.display = 'none';
+        }
+
+        filterAll.addEventListener('click', () => {
+            setActive(filterAll);
+            sectionSingle.style.display = 'block';
+            sectionUniversal.style.display = 'block';
+            sectionDirectional.style.display = 'block';
+            sectionOxford.style.display = 'block';
+        });
+
+        filterSingle.addEventListener('click', () => {
+            setActive(filterSingle);
+            hideAllSections();
+            sectionSingle.style.display = 'block';
+        });
+
+        filterUniversal.addEventListener('click', () => {
+            setActive(filterUniversal);
+            hideAllSections();
+            sectionUniversal.style.display = 'block';
+        });
+
+        filterDirectional.addEventListener('click', () => {
+            setActive(filterDirectional);
+            hideAllSections();
+            sectionDirectional.style.display = 'block';
+        });
+
+        filterOxford.addEventListener('click', () => {
+            setActive(filterOxford);
+            hideAllSections();
+            sectionOxford.style.display = 'block';
+        });
+
+        renderGrids();
     </script>
 </body>
 </html>
