@@ -93,10 +93,27 @@
                 </a>
             </div>
         </div>
+        <!-- Mobile menu button -->
+        <button class="md:hidden p-2" id="mobile-menu-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
     </nav>
 
     <!-- Mobile Navigation - Always Visible -->
     <div class="md:hidden bg-white border-b border-gray-100 px-6 py-4">
+        <div class="flex flex-col space-y-4 font-black uppercase text-[11px] tracking-[0.2em]">
+            <a href="index.html" class="text-geek-red">Home</a>
+            <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
+            <a href="product-catalog.html" class="hover:text-geek-red transition">Product Catalog</a>
+            <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
+            <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
+        </div>
+    </div>
+
+    <!-- Mobile Hamburger Menu (Collapsible) -->
+    <div class="hidden md:hidden bg-white border-b border-gray-100 px-6 py-4" id="mobile-menu">
         <div class="flex flex-col space-y-4 font-black uppercase text-[11px] tracking-[0.2em]">
             <a href="index.html" class="text-geek-red">Home</a>
             <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
@@ -547,6 +564,16 @@
     </div>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
         // Floating contact button toggle
         const contactBtn = document.getElementById('contact-btn');
         const contactDropdown = document.getElementById('contact-dropdown');
