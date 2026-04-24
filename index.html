@@ -277,6 +277,65 @@
         </div>
     </section>
 
+    <!-- Find Your Part - Quick Upload Section -->
+    <section class="py-20 bg-white px-8 border-b border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <p class="text-geek-red font-black tracking-widest uppercase mb-4 text-xs">Not Sure Which Part You Need?</p>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase mb-4">Upload a Photo & We'll Identify It</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Send us a photo of your luggage part, and our experts will help you find the exact match within 12 hours.</p>
+            </div>
+
+            <!-- Quick Upload Form -->
+            <div class="bg-gray-50 rounded-xl p-6 md:p-8">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Left: Upload Area -->
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-wide text-gray-700 mb-3">
+                            <i class="fas fa-camera mr-2 text-geek-red"></i>Upload Part Photo
+                        </label>
+                        <div id="index-upload-zone" class="upload-zone rounded-lg p-6 text-center cursor-pointer bg-white border-2 border-dashed border-gray-200 hover:border-geek-red transition">
+                            <div id="index-upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-300 mb-2"></i>
+                                <p class="text-gray-500 text-sm">Click or drag image here</p>
+                                <p class="text-gray-400 text-xs mt-1">JPG, PNG, WEBP (Max 10MB)</p>
+                            </div>
+                            <div id="index-upload-preview" class="hidden">
+                                <img id="index-preview-image" class="max-h-32 mx-auto rounded mb-2 object-contain">
+                                <button type="button" id="index-remove-image" class="text-red-500 text-xs hover:text-red-700">
+                                    <i class="fas fa-trash mr-1"></i>Remove
+                                </button>
+                            </div>
+                            <input type="file" id="index-image-input" accept="image/*" class="hidden">
+                        </div>
+                    </div>
+
+                    <!-- Right: Description & Buttons -->
+                    <div>
+                        <label class="block text-xs font-black uppercase tracking-wide text-gray-700 mb-3">
+                            <i class="fas fa-comment-alt mr-2 text-geek-red"></i>Describe Your Part
+                        </label>
+                        <textarea id="index-description" rows="3" placeholder="Brand, Model, Part Type (wheel/handle/lock)..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-geek-red focus:ring-1 focus:ring-geek-red resize-none text-sm mb-4"></textarea>
+
+                        <label class="block text-xs font-black uppercase tracking-wide text-gray-700 mb-3">
+                            <i class="fas fa-reply mr-2 text-geek-red"></i>Your Contact (Email/WhatsApp)
+                        </label>
+                        <input type="text" id="index-contact" placeholder="For us to reply..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-geek-red focus:ring-1 focus:ring-geek-red text-sm mb-4">
+
+                        <div class="flex gap-3">
+                            <button type="button" id="index-email-btn" class="flex-1 bg-geek-red text-white py-3 px-4 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-black transition flex items-center justify-center gap-2">
+                                <i class="fas fa-envelope"></i>Email
+                            </button>
+                            <button type="button" id="index-whatsapp-btn" class="flex-1 bg-[#25D366] text-white py-3 px-4 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-[#1da851] transition flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp text-lg"></i>WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Brand Matrix -->
     <section class="py-24 bg-gray-50 px-8">
         <div class="max-w-7xl mx-auto text-center">
@@ -474,6 +533,108 @@
                 contactDropdown.classList.remove('flex');
             }
         });
+
+        // Index page upload zone
+        const indexUploadZone = document.getElementById('index-upload-zone');
+        const indexImageInput = document.getElementById('index-image-input');
+        const indexUploadPlaceholder = document.getElementById('index-upload-placeholder');
+        const indexUploadPreview = document.getElementById('index-upload-preview');
+        const indexPreviewImage = document.getElementById('index-preview-image');
+        const indexRemoveImage = document.getElementById('index-remove-image');
+        const indexDescription = document.getElementById('index-description');
+        const indexContact = document.getElementById('index-contact');
+        const indexEmailBtn = document.getElementById('index-email-btn');
+        const indexWhatsappBtn = document.getElementById('index-whatsapp-btn');
+
+        let indexSelectedFile = null;
+
+        if (indexUploadZone) {
+            indexUploadZone.addEventListener('click', () => indexImageInput.click());
+
+            indexUploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                indexUploadZone.classList.add('dragover');
+            });
+
+            indexUploadZone.addEventListener('dragleave', () => {
+                indexUploadZone.classList.remove('dragover');
+            });
+
+            indexUploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                indexUploadZone.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    handleIndexImageFile(file);
+                }
+            });
+
+            indexImageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) handleIndexImageFile(file);
+            });
+
+            function handleIndexImageFile(file) {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('Image size must be less than 10MB');
+                    return;
+                }
+                indexSelectedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    indexPreviewImage.src = e.target.result;
+                    indexUploadPlaceholder.classList.add('hidden');
+                    indexUploadPreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+
+            indexRemoveImage.addEventListener('click', (e) => {
+                e.stopPropagation();
+                indexSelectedFile = null;
+                indexImageInput.value = '';
+                indexPreviewImage.src = '';
+                indexUploadPreview.classList.add('hidden');
+                indexUploadPlaceholder.classList.remove('hidden');
+            });
+
+            indexEmailBtn.addEventListener('click', () => {
+                const description = indexDescription.value.trim();
+                const contact = indexContact.value.trim();
+
+                if (!indexSelectedFile && !description) {
+                    alert('Please upload an image or describe your part.');
+                    return;
+                }
+
+                const subject = encodeURIComponent('Part Identification Request');
+                const body = encodeURIComponent(
+                    `Part Identification Request\n\n` +
+                    `Contact: ${contact || 'Not provided'}\n\n` +
+                    `Description:\n${description || 'No description provided'}\n\n` +
+                    `Please attach the part photo when sending this email.`
+                );
+
+                window.location.href = `mailto:yiier0624@gmail.com?subject=${subject}&body=${body}`;
+            });
+
+            indexWhatsappBtn.addEventListener('click', () => {
+                const description = indexDescription.value.trim();
+                const contact = indexContact.value.trim();
+
+                if (!indexSelectedFile && !description) {
+                    alert('Please upload an image or describe your part.');
+                    return;
+                }
+
+                let message = `Hi, I need help identifying a luggage part.\n\n`;
+                if (description) message += `Description: ${description}\n`;
+                if (contact) message += `My contact: ${contact}\n`;
+                message += `\nI'll send the photo separately. Thanks!`;
+
+                window.open(`https://wa.me/8617889453642?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        }
     </script>
 </body>
 </html>
