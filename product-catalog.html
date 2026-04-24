@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog | ProLuggageParts</title>
+    <meta name="description" content="Browse our complete catalog of luggage replacement parts. Spinner Wheels, Telescopic Handles, TSA Locks, Carts and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .text-geek-red { color: #E30613; }
+        .bg-geek-red { background-color: #E30613; }
+        .bg-industrial-black { background-color: #0F0F0F; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="border-b border-gray-200 py-4 px-6 flex justify-between items-center bg-white sticky top-0 z-50">
+        <a href="index.html"><img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10"></a>
+        <div class="hidden md:flex space-x-8 font-medium">
+            <a href="index.html" class="hover:text-geek-red transition">Home</a>
+            <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
+            <a href="product-catalog.html" class="text-geek-red transition">Product Catalog</a>
+            <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
+            <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
+        </div>
+        <div class="relative">
+            <button id="nav-contact-btn" class="bg-geek-red text-white px-5 py-2 rounded font-bold flex items-center gap-2">
+                <span>Contact Us</span>
+                <i class="fas fa-chevron-down text-[8px]"></i>
+            </button>
+            <div id="nav-contact-dropdown" class="absolute right-0 mt-2 hidden bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50">
+                <a href="mailto:yiier0624@gmail.com" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fas fa-envelope text-gray-400"></i>Email Us
+                </a>
+                <a href="https://wa.me/8617889453642" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fab fa-whatsapp text-[#25D366]"></i>WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-industrial-black py-16 px-6 text-center">
+        <h1 class="text-white text-4xl md:text-5xl font-black mb-4 uppercase">Product Catalog</h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg">Browse our complete collection of precision-engineered luggage replacement parts</p>
+    </header>
+
+    <!-- Product Categories -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-black uppercase mb-4">Our Product Categories</h2>
+                <p class="text-gray-500">Click on any category to explore our full range of products</p>
+            </div>
+
+            <!-- Category Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Spinner Wheels -->
+                <a href="parts-finder.html" class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        <img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-04-24%2FMiniMax-M2.7%2F2046995474996532109%2Fdc7baa0c85d23aa41ac0a84b1659639d14df1ac092e6fe7f5e32a02c836d8f8c..jpeg?Expires=1777097577&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=I0K2LI2NOrV3C6MCGIUlPxGBRVk%3D" alt="Spinner Wheels" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black uppercase text-lg mb-2">Spinner Wheels</h3>
+                        <p class="text-gray-400 text-sm mb-4">200+ different models for all major brands</p>
+                        <div class="flex items-center text-geek-red font-bold text-sm">
+                            <span>View Products</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Telescopic Handles -->
+                <a href="parts-finder.html" class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        <img src="https://sc02.alicdn.com/kf/A31d66204ced74f5c8b4bbe2553e4c4a7M.png" alt="Telescopic Handles" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black uppercase text-lg mb-2">Telescopic Handles</h3>
+                        <p class="text-gray-400 text-sm mb-4">150+ models with adjustable lengths</p>
+                        <div class="flex items-center text-geek-red font-bold text-sm">
+                            <span>View Products</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- TSA Locks -->
+                <a href="parts-finder.html" class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-square overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-04-24%2FMiniMax-M2.7%2F2046995474996532109%2Fb9bec8e34cad8f352529c5a40e76bb57ddc199b8465e455311b35cca10380693..jpeg?Expires=1777095536&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=wXf6vCdgsbPqDSpgqBLRtzIUg3A%3D" alt="TSA Locks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black uppercase text-lg mb-2">TSA Locks</h3>
+                        <p class="text-gray-400 text-sm mb-4">50+ TSA-approved security locks</p>
+                        <div class="flex items-center text-geek-red font-bold text-sm">
+                            <span>View Products</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Carts -->
+                <a href="parts-finder.html" class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-square overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <img src="https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/ccv2%2F2026-04-24%2FMiniMax-M2.7%2F2046995474996532109%2Fa222253fa8ea56557804e8a4d8b0b427cd9babd71c36b7d6429bc3c8b1602575..jpeg?Expires=1777095536&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=iU%2FtPlx6wGRg1gCo7rsUMSa7lt0%3D" alt="Carts" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black uppercase text-lg mb-2">Carts</h3>
+                        <p class="text-gray-400 text-sm mb-4">30+ utility and luggage carts</p>
+                        <div class="flex items-center text-geek-red font-bold text-sm">
+                            <span>View Products</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload & Identify Section -->
+    <section class="py-16 px-6 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-black uppercase mb-4">Can't Find What You Need?</h2>
+            <p class="text-gray-500 mb-8 max-w-2xl mx-auto">Upload a photo of your luggage part and our experts will identify the exact model and find the right replacement for you.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="parts-finder.html" class="bg-geek-red text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition">Upload Photo</a>
+                <a href="https://wa.me/8617889453642" target="_blank" class="border-2 border-geek-red text-geek-red px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-geek-red hover:text-white transition flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i>WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-6 bg-geek-red text-white text-center">
+        <h2 class="text-3xl font-black uppercase mb-4">Ready to Get Started?</h2>
+        <p class="text-white/80 mb-8 max-w-2xl mx-auto">Contact us today for a free consultation and personalized quote.</p>
+        <a href="mailto:yiier0624@gmail.com" class="inline-block bg-white text-geek-red px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:scale-105 transition">Contact Us</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-industrial-black text-gray-400 py-10 px-6 text-center">
+        <p>&copy; 2026 ProLuggageParts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Nav contact dropdown
+        const navContactBtn = document.getElementById('nav-contact-btn');
+        const navContactDropdown = document.getElementById('nav-contact-dropdown');
+
+        if (navContactBtn) {
+            navContactBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navContactDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navContactDropdown.contains(e.target) && e.target !== navContactBtn) {
+                    navContactDropdown.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
