@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carts | ProLuggageParts</title>
+    <meta name="description" content="Browse our complete collection of luggage carts. 100+ utility and luggage carts for all needs.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .text-geek-red { color: #E30613; }
+        .bg-geek-red { background-color: #E30613; }
+        .bg-industrial-black { background-color: #0F0F0F; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="border-b border-gray-200 py-4 px-6 flex justify-between items-center bg-white sticky top-0 z-50">
+        <a href="index.html"><img src="https://sc02.alicdn.com/kf/A3066b40b77604898a70828ea08669675T.png" alt="K-ROOP Logo" class="h-10"></a>
+        <div class="hidden md:flex space-x-8 font-medium">
+            <a href="index.html" class="hover:text-geek-red transition">Home</a>
+            <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
+            <a href="product-catalog.html" class="text-geek-red transition">Product Catalog</a>
+            <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
+            <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
+        </div>
+        <div class="relative">
+            <button id="nav-contact-btn" class="bg-geek-red text-white px-5 py-2 rounded font-bold flex items-center gap-2">
+                <span>Contact Us</span>
+                <i class="fas fa-chevron-down text-[8px]"></i>
+            </button>
+            <div id="nav-contact-dropdown" class="absolute right-0 mt-2 hidden bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50">
+                <a href="mailto:yiier0624@gmail.com" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fas fa-envelope text-gray-400"></i>Email Us
+                </a>
+                <a href="https://wa.me/8617889453642" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fab fa-whatsapp text-[#25D366]"></i>WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-industrial-black py-12 px-6 text-center">
+        <div class="max-w-7xl mx-auto">
+            <a href="product-catalog.html" class="text-gray-400 hover:text-white transition text-sm mb-4 inline-flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Back to Product Catalog
+            </a>
+            <h1 class="text-white text-3xl md:text-4xl font-black mb-2 uppercase">Carts</h1>
+            <p class="text-gray-400">100+ Models Available</p>
+        </div>
+    </header>
+
+    <!-- SKU Grid -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
+                <p class="text-gray-500 text-sm">Showing <span class="font-bold text-gray-900">all products</span></p>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-geek-red text-white text-sm font-bold rounded">All</button>
+                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Utility</button>
+                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-sm font-bold rounded hover:border-geek-red transition">Luggage</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="sku-grid"></div>
+
+            <div class="mt-16 text-center bg-white rounded-xl p-8 shadow-lg">
+                <h3 class="text-xl font-bold mb-2">Can't find the right cart?</h3>
+                <p class="text-gray-500 mb-6">Upload a photo of your cart and we'll identify the exact model for you.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="parts-finder.html" class="bg-geek-red text-white px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition">Upload Photo</a>
+                    <a href="https://wa.me/8617889453642" target="_blank" class="border-2 border-geek-red text-geek-red px-8 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-geek-red hover:text-white transition flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i>WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-industrial-black text-gray-400 py-10 px-6 text-center">
+        <p>&copy; 2026 ProLuggageParts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navContactBtn = document.getElementById('nav-contact-btn');
+        const navContactDropdown = document.getElementById('nav-contact-dropdown');
+
+        if (navContactBtn) {
+            navContactBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navContactDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navContactDropdown.contains(e.target) && e.target !== navContactBtn) {
+                    navContactDropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        const skuItems = [
+            { id: 'CT-001', name: 'Standard Luggage Cart', model: 'CT-STD-01', price: 'Contact for price', image: '' },
+            { id: 'CT-002', name: 'Foldable Cart', model: 'CT-FLD-02', price: 'Contact for price', image: '' },
+            { id: 'CT-003', name: 'Heavy Duty Cart', model: 'CT-HD-03', price: 'Contact for price', image: '' },
+            { id: 'CT-004', name: 'Travel Size Cart', model: 'CT-TRV-04', price: 'Contact for price', image: '' },
+            { id: 'CT-005', name: 'Adjustable Cart', model: 'CT-ADJ-05', price: 'Contact for price', image: '' },
+            { id: 'CT-006', name: 'Stair Climbing Cart', model: 'CT-STC-06', price: 'Contact for price', image: '' },
+            { id: 'CT-007', name: 'Platform Cart', model: 'CT-PLT-07', price: 'Contact for price', image: '' },
+            { id: 'CT-008', name: 'Hand Truck', model: 'CT-HTR-08', price: 'Contact for price', image: '' },
+            { id: 'CT-009', name: 'Utility Cart', model: 'CT-UTL-09', price: 'Contact for price', image: '' },
+            { id: 'CT-010', name: 'Industrial Cart', model: 'CT-IND-10', price: 'Contact for price', image: '' },
+            { id: 'CT-011', name: 'Compact Cart', model: 'CT-CMP-11', price: 'Contact for price', image: '' },
+            { id: 'CT-012', name: 'Motorized Cart', model: 'CT-MOT-12', price: 'Contact for price', image: '' },
+        ];
+
+        function renderSKUGrid() {
+            const grid = document.getElementById('sku-grid');
+            const placeholderSvg = `<svg class="w-full h-full object-contain p-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="#f3f4f6"/>
+                <rect x="35" y="25" width="30" height="45" fill="#d1d5db"/>
+                <rect x="40" y="70" width="8" height="15" fill="#9ca3af"/>
+                <rect x="52" y="70" width="8" height="15" fill="#9ca3af"/>
+                <circle cx="44" cy="90" r="5" fill="#6b7280"/>
+                <circle cx="56" cy="90" r="5" fill="#6b7280"/>
+                <text x="50" y="95" text-anchor="middle" font-size="7" fill="#6b7280">Image coming soon</text>
+            </svg>`;
+
+            grid.innerHTML = skuItems.map(item => `
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
+                    <div class="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                        ${item.image
+                            ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">`
+                            : placeholderSvg
+                        }
+                    </div>
+                    <div class="p-4">
+                        <p class="text-xs text-gray-400 mb-1">${item.id}</p>
+                        <h3 class="font-bold text-sm mb-1 truncate">${item.name}</h3>
+                        <p class="text-xs text-gray-500 mb-2">Model: ${item.model}</p>
+                        <p class="text-geek-red font-bold text-sm">${item.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderSKUGrid();
+    </script>
+</body>
+</html>
