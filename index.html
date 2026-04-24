@@ -78,7 +78,20 @@
             <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
             <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
         </div>
-        <a href="mailto:yiier0624@gmail.com" class="bg-geek-red text-white px-8 py-3 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-black transition shadow-lg shadow-red-900/20">Direct Quote</a>
+        <div class="relative">
+            <button id="nav-contact-btn" class="bg-geek-red text-white px-6 py-3 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-black transition shadow-lg shadow-red-900/20 flex items-center gap-2">
+                <span>Contact Us</span>
+                <i class="fas fa-chevron-down text-[8px]"></i>
+            </button>
+            <div id="nav-contact-dropdown" class="absolute right-0 mt-2 hidden bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50">
+                <a href="mailto:yiier0624@gmail.com" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fas fa-envelope text-gray-400"></i>Email Us
+                </a>
+                <a href="https://wa.me/8617889453642" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium">
+                    <i class="fab fa-whatsapp text-[#25D366]"></i>WhatsApp
+                </a>
+            </div>
+        </div>
         <!-- Mobile menu button -->
         <button class="md:hidden p-2" id="mobile-menu-btn">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -423,7 +436,20 @@
             <h2 class="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">Ready to Partner with Us?</h2>
             <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">Get a personalized quote within 4 hours. Our team is ready to support your luggage parts needs.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="mailto:yiier0624@gmail.com" class="bg-white text-geek-red px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-xl">Get Free Quote</a>
+                <div class="relative inline-block">
+                    <button class="bg-white text-geek-red px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-xl flex items-center gap-3 mx-auto">
+                        <span>Get Free Quote</span>
+                        <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden bg-white rounded-lg shadow-xl overflow-hidden z-10 min-w-[160px]">
+                        <a href="mailto:yiier0624@gmail.com" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+                            <i class="fas fa-envelope text-gray-400"></i>Email Us
+                        </a>
+                        <a href="https://wa.me/8617889453642" target="_blank" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium text-gray-700">
+                            <i class="fab fa-whatsapp text-[#25D366]"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
                 <a href="parts-finder.html" class="border-2 border-white text-white px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:bg-white hover:text-geek-red transition">Browse Catalog</a>
             </div>
             <p class="mt-8 text-white/60 text-sm font-medium">Average Response Time: <span class="text-white font-bold">Under 4 Hours</span></p>
@@ -463,6 +489,7 @@
                     <h4 class="font-black text-xs uppercase tracking-[0.3em] mb-6 text-geek-red">Contact</h4>
                     <ul class="space-y-3 text-gray-400 text-sm">
                         <li><a href="mailto:yiier0624@gmail.com" class="hover:text-white transition">yiier0624@gmail.com</a></li>
+                        <li><a href="https://wa.me/8617889453642" target="_blank" class="hover:text-white transition flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
                         <li class="text-gray-500">Guangzhou Fanfu Travel Goods Co., Ltd.</li>
                         <li class="text-gray-500">Industrial Zone, Guangzhou, Guangdong, China</li>
                     </ul>
@@ -633,6 +660,23 @@
                 message += `\nI'll send the photo separately. Thanks!`;
 
                 window.open(`https://wa.me/8617889453642?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        }
+
+        // Nav contact dropdown
+        const navContactBtn = document.getElementById('nav-contact-btn');
+        const navContactDropdown = document.getElementById('nav-contact-dropdown');
+
+        if (navContactBtn) {
+            navContactBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navContactDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navContactDropdown.contains(e.target) && e.target !== navContactBtn) {
+                    navContactDropdown.classList.add('hidden');
+                }
             });
         }
     </script>
