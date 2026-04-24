@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parts Finder | Find Luggage Replacement Parts | ProLuggageParts</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .text-geek-red { color: #E30613; }
         .bg-geek-red { background-color: #E30613; }
+        .bg-industrial-black { background-color: #0F0F0F; }
+
+        .upload-zone { border: 2px dashed #d1d5db; transition: all 0.3s ease; }
+        .upload-zone:hover { border-color: #E30613; background-color: #fef2f2; }
+        .upload-zone.dragover { border-color: #E30613; background-color: #fef2f2; }
+
+        .preview-img { max-height: 200px; object-fit: contain; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -30,59 +38,221 @@
     <header class="bg-white py-12 px-6 border-b border-gray-100">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Luggage Parts <span class="text-geek-red">Finder</span></h1>
-            <p class="text-gray-500 mb-8">Search our database of 1,000+ parts compatible with 90% of global luggage brands.</p>
-            
-            <!-- Mock Search Bar -->
-            <div class="flex max-w-2xl mx-auto shadow-lg rounded-lg overflow-hidden border border-gray-200">
-                <input type="text" placeholder="Enter Brand (e.g. Rimowa) or Part Type (e.g. Spinner Wheel)..." class="w-full px-6 py-4 outline-none">
-                <button class="bg-geek-red text-white px-8 py-4 font-bold">SEARCH</button>
-            </div>
+            <p class="text-gray-500 mb-8">Upload a photo of your part, and our experts will identify it for you.</p>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="py-16 px-6 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-4 gap-8">
-            <!-- Sidebar Filter (Mock) -->
-            <div class="hidden md:block">
-                <h4 class="font-bold mb-4 uppercase text-sm tracking-widest text-gray-400">Categories</h4>
-                <ul class="space-y-3 font-medium">
-                    <li><a href="#" class="text-geek-red">All Components</a></li>
-                    <li><a href="#" class="hover:text-geek-red">Spinner Wheels</a></li>
-                    <li><a href="#" class="hover:text-geek-red">Telescopic Handles</a></li>
-                    <li><a href="#" class="hover:text-geek-red">Side/Top Handles</a></li>
-                    <li><a href="#" class="hover:text-geek-red">TSA Locks</a></li>
-                </ul>
+    <!-- Upload Form Section -->
+    <section class="py-12 px-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <form id="part-form">
+                    <!-- Image Upload -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold uppercase tracking-wide text-gray-700 mb-4">
+                            <i class="fas fa-camera mr-2 text-geek-red"></i>Upload Part Photo
+                        </label>
+                        <div id="upload-zone" class="upload-zone rounded-lg p-8 text-center cursor-pointer bg-gray-50">
+                            <div id="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-300 mb-4"></i>
+                                <p class="text-gray-500 mb-2">Click or drag image here</p>
+                                <p class="text-gray-400 text-sm">Supports: JPG, PNG, WEBP (Max 10MB)</p>
+                            </div>
+                            <div id="upload-preview" class="hidden">
+                                <img id="preview-image" class="preview-img mx-auto rounded-lg mb-4">
+                                <button type="button" id="remove-image" class="text-red-500 text-sm hover:text-red-700">
+                                    <i class="fas fa-trash mr-1"></i>Remove image
+                                </button>
+                            </div>
+                            <input type="file" id="image-input" accept="image/*" class="hidden">
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold uppercase tracking-wide text-gray-700 mb-4">
+                            <i class="fas fa-comment-alt mr-2 text-geek-red"></i>Describe Your Part
+                        </label>
+                        <textarea id="description" rows="4" placeholder="Tell us about your luggage: Brand, Model, Part Type (wheel/handle/lock), any visible markings..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-geek-red focus:ring-1 focus:ring-geek-red resize-none"></textarea>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="mb-8">
+                        <label class="block text-sm font-bold uppercase tracking-wide text-gray-700 mb-4">
+                            <i class="fas fa-envelope mr-2 text-geek-red"></i>Your Email or WhatsApp
+                        </label>
+                        <input type="text" id="contact" placeholder="Enter your email or WhatsApp number for us to reply..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-geek-red focus:ring-1 focus:ring-geek-red">
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="submit" formaction="mailto:yiier0624@gmail.com" class="flex-1 bg-geek-red text-white py-4 px-6 rounded-lg font-bold uppercase tracking-wide hover:bg-black transition flex items-center justify-center gap-2">
+                            <i class="fas fa-envelope"></i>Send via Email
+                        </button>
+                        <button type="button" id="whatsapp-btn" class="flex-1 bg-[#25D366] text-white py-4 px-6 rounded-lg font-bold uppercase tracking-wide hover:bg-[#1da851] transition flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp text-xl"></i>Send via WhatsApp
+                        </button>
+                    </div>
+
+                    <p class="text-center text-gray-400 text-sm mt-6">
+                        <i class="fas fa-clock mr-1"></i>Our experts will reply within 12 hours
+                    </p>
+                </form>
             </div>
-            
-            <!-- Parts Results (Mock) -->
-            <div class="md:col-span-3">
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Part 1 -->
-                    <div class="bg-white border border-gray-100 p-4 rounded hover:shadow-md transition">
-                        <img src="https://sc02.alicdn.com/kf/A8255020d95fa46559659f1fa83d97fdfR.png" alt="Wheel" class="w-full h-40 object-cover mb-4 bg-gray-50 rounded">
-                        <h5 class="font-bold text-sm mb-1 uppercase">Spinner Wheel - Dual</h5>
-                        <p class="text-xs text-gray-400 mb-4">Ref: PLP-8822</p>
-                        <a href="mailto:yiier0624@gmail.com" class="block text-center border border-geek-red text-geek-red py-2 rounded font-bold text-xs hover:bg-geek-red hover:text-white">Check Availability</a>
+        </div>
+    </section>
+
+    <!-- Why Upload Photo Section -->
+    <section class="py-12 px-6 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-8">Why Upload a Photo?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-geek-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search text-2xl text-geek-red"></i>
                     </div>
-                    <!-- Part 2 -->
-                    <div class="bg-white border border-gray-100 p-4 rounded hover:shadow-md transition">
-                        <img src="https://sc02.alicdn.com/kf/A31d66204ced74f5c8b4bbe2553e4c4a7M.png" alt="Handle" class="w-full h-40 object-cover mb-4 bg-gray-50 rounded">
-                        <h5 class="font-bold text-sm mb-1 uppercase">Aluminum Telescopic Handle</h5>
-                        <p class="text-xs text-gray-400 mb-4">Ref: PLP-2234</p>
-                        <a href="mailto:yiier0624@gmail.com" class="block text-center border border-geek-red text-geek-red py-2 rounded font-bold text-xs hover:bg-geek-red hover:text-white">Check Availability</a>
+                    <h3 class="font-bold mb-2">Exact Match</h3>
+                    <p class="text-gray-500 text-sm">Photos help us identify the exact model and specifications</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-geek-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-2xl text-geek-red"></i>
                     </div>
+                    <h3 class="font-bold mb-2">Save Time</h3>
+                    <p class="text-gray-500 text-sm">No need to know part numbers or technical terms</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-geek-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-double text-2xl text-geek-red"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">100% Accuracy</h3>
+                    <p class="text-gray-500 text-sm">Our experts ensure you get the correct replacement part</p>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
     <!-- Bottom CTA -->
     <section class="bg-industrial-black py-16 px-6 text-center text-white">
-        <h2 class="text-2xl font-bold mb-4">Can't find the exact part?</h2>
+        <h2 class="text-2xl font-bold mb-4">Still can't find what you need?</h2>
         <p class="text-gray-400 mb-8">Send us a photo of your luggage, and our experts will identify it for you within 12 hours.</p>
         <a href="mailto:yiier0624@gmail.com" class="bg-geek-red text-white px-8 py-3 rounded font-bold">Contact Expert</a>
     </section>
 
+    <script>
+        const uploadZone = document.getElementById('upload-zone');
+        const imageInput = document.getElementById('image-input');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const uploadPreview = document.getElementById('upload-preview');
+        const previewImage = document.getElementById('preview-image');
+        const removeImageBtn = document.getElementById('remove-image');
+        const form = document.getElementById('part-form');
+        const descriptionInput = document.getElementById('description');
+        const contactInput = document.getElementById('contact');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+
+        let selectedFile = null;
+
+        // Click to upload
+        uploadZone.addEventListener('click', () => imageInput.click());
+
+        // Drag and drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleImageFile(file);
+            }
+        });
+
+        // File input change
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageFile(file);
+            }
+        });
+
+        function handleImageFile(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Image size must be less than 10MB');
+                return;
+            }
+            selectedFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                uploadPlaceholder.classList.add('hidden');
+                uploadPreview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Remove image
+        removeImageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectedFile = null;
+            imageInput.value = '';
+            previewImage.src = '';
+            uploadPreview.classList.add('hidden');
+            uploadPlaceholder.classList.remove('hidden');
+        });
+
+        // Form submit via email
+        form.addEventListener('submit', (e) => {
+            if (!selectedFile && !descriptionInput.value.trim()) {
+                e.preventDefault();
+                alert('Please upload an image or describe your part.');
+                return;
+            }
+
+            const description = descriptionInput.value.trim();
+            const contact = contactInput.value.trim();
+
+            // Update mailto with info
+            const subject = encodeURIComponent('Part Identification Request');
+            const body = encodeURIComponent(
+                `Part Identification Request\n\n` +
+                `Contact: ${contact || 'Not provided'}\n\n` +
+                `Description:\n${description || 'No description provided'}\n\n` +
+                `Please attach the part photo when sending this email.`
+            );
+
+            form.action = `mailto:yiier0624@gmail.com?subject=${subject}&body=${body}`;
+        });
+
+        // WhatsApp button
+        whatsappBtn.addEventListener('click', () => {
+            const description = descriptionInput.value.trim();
+            const contact = contactInput.value.trim();
+
+            if (!selectedFile && !description) {
+                alert('Please upload an image or describe your part.');
+                return;
+            }
+
+            let message = `Hi, I need help identifying a luggage part.\n\n`;
+            if (description) {
+                message += `Description: ${description}\n`;
+            }
+            if (contact) {
+                message += `My contact: ${contact}\n`;
+            }
+            message += `\nI'll send the photo separately. Thanks!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/8617889453642?text=${encodedMessage}`, '_blank');
+        });
+    </script>
 </body>
 </html>
