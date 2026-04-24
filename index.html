@@ -439,11 +439,11 @@
             <p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">Get a personalized quote within 4 hours. Our team is ready to support your luggage parts needs.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <div class="relative inline-block">
-                    <button class="bg-white text-geek-red px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-xl flex items-center gap-3 mx-auto">
+                    <button class="cta-quote-btn bg-white text-geek-red px-10 py-5 rounded-sm font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition shadow-xl flex items-center gap-3 mx-auto">
                         <span>Get Free Quote</span>
                         <i class="fas fa-chevron-down text-[10px]"></i>
                     </button>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden bg-white rounded-lg shadow-xl overflow-hidden z-10 min-w-[160px]">
+                    <div class="cta-quote-dropdown absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden bg-white rounded-lg shadow-xl overflow-hidden z-10 min-w-[160px]">
                         <a href="mailto:yiier0624@gmail.com" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition text-sm font-medium text-gray-700">
                             <i class="fas fa-envelope text-gray-400"></i>Email Us
                         </a>
@@ -678,6 +678,23 @@
             document.addEventListener('click', function(e) {
                 if (!navContactDropdown.contains(e.target) && e.target !== navContactBtn) {
                     navContactDropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        // CTA Get Free Quote dropdown
+        const ctaQuoteBtn = document.querySelector('.cta-quote-btn');
+        const ctaQuoteDropdown = document.querySelector('.cta-quote-dropdown');
+
+        if (ctaQuoteBtn && ctaQuoteDropdown) {
+            ctaQuoteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                ctaQuoteDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!ctaQuoteDropdown.contains(e.target) && e.target !== ctaQuoteBtn) {
+                    ctaQuoteDropdown.classList.add('hidden');
                 }
             });
         }
