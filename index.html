@@ -7,6 +7,7 @@
     <meta name="description" content="Leading global supplier of precision-engineered luggage parts. 3000+ SQM facility, 50000+ units in stock, serving 40+ countries. OEM/ODM available.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .text-geek-red { color: #E30613; }
@@ -431,6 +432,43 @@
                     el.style.opacity = '';
                 });
             }, 100);
+        });
+    </script>
+
+    <!-- Floating Contact Button -->
+    <div class="fixed right-6 bottom-6 z-50">
+        <!-- Dropdown Menu -->
+        <div id="contact-dropdown" class="absolute bottom-16 right-0 hidden flex-col gap-3 mb-4">
+            <a href="mailto:yiier0624@gmail.com" class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition transform">
+                <i class="fas fa-envelope text-gray-600 text-lg"></i>
+            </a>
+            <a href="https://wa.me/8613800138000" target="_blank" class="w-12 h-12 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition transform">
+                <i class="fab fa-whatsapp text-white text-xl"></i>
+            </a>
+        </div>
+        <!-- Main Button -->
+        <button id="contact-btn" class="w-14 h-14 bg-geek-red rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition transform cta-glow">
+            <i class="fas fa-headset text-white text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        // Floating contact button toggle
+        const contactBtn = document.getElementById('contact-btn');
+        const contactDropdown = document.getElementById('contact-dropdown');
+
+        contactBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            contactDropdown.classList.toggle('hidden');
+            contactDropdown.classList.toggle('flex');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!contactDropdown.contains(e.target) && e.target !== contactBtn) {
+                contactDropdown.classList.add('hidden');
+                contactDropdown.classList.remove('flex');
+            }
         });
     </script>
 </body>
