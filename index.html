@@ -93,22 +93,50 @@
                 </a>
             </div>
         </div>
-        <!-- Mobile menu button -->
-        <button class="md:hidden p-2" id="mobile-menu-btn">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-        </button>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="hidden md:hidden bg-white border-b border-gray-100 px-6 py-4" id="mobile-menu">
+    <!-- Mobile Navigation - Always Visible -->
+    <div class="md:hidden bg-white border-b border-gray-100 px-6 py-4">
         <div class="flex flex-col space-y-4 font-black uppercase text-[11px] tracking-[0.2em]">
             <a href="index.html" class="text-geek-red">Home</a>
             <a href="parts-finder.html" class="hover:text-geek-red transition">Parts Finder</a>
             <a href="product-catalog.html" class="hover:text-geek-red transition">Product Catalog</a>
             <a href="oem-odm.html" class="hover:text-geek-red transition">OEM/ODM</a>
             <a href="wholesale.html" class="hover:text-geek-red transition">Wholesale</a>
+        </div>
+
+        <!-- Mobile Quick Links -->
+        <div class="mt-6 pt-6 border-t border-gray-100">
+            <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-4">Product Categories</p>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="spinner-wheels.html" class="block bg-gray-50 rounded-lg p-3 text-center hover:bg-geek-red hover:text-white transition">
+                    <span class="text-xs font-bold block">Spinner Wheels</span>
+                    <span class="text-[10px] opacity-60">600+ Models</span>
+                </a>
+                <a href="telescopic-handles.html" class="block bg-gray-50 rounded-lg p-3 text-center hover:bg-geek-red hover:text-white transition">
+                    <span class="text-xs font-bold block">Handles</span>
+                    <span class="text-[10px] opacity-60">400+ Models</span>
+                </a>
+                <a href="tsa-locks.html" class="block bg-gray-50 rounded-lg p-3 text-center hover:bg-geek-red hover:text-white transition">
+                    <span class="text-xs font-bold block">TSA Locks</span>
+                    <span class="text-[10px] opacity-60">100+ Models</span>
+                </a>
+                <a href="carts.html" class="block bg-gray-50 rounded-lg p-3 text-center hover:bg-geek-red hover:text-white transition">
+                    <span class="text-xs font-bold block">Carts</span>
+                    <span class="text-[10px] opacity-60">100+ Models</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Trust Info -->
+        <div class="mt-6 pt-6 border-t border-gray-100">
+            <p class="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-4">Why Choose Us</p>
+            <div class="space-y-2 text-xs text-gray-600">
+                <div class="flex items-center gap-2"><i class="fas fa-check text-geek-red"></i> ISO 9001 Certified</div>
+                <div class="flex items-center gap-2"><i class="fas fa-check text-geek-red"></i> 40+ Countries Served</div>
+                <div class="flex items-center gap-2"><i class="fas fa-check text-geek-red"></i> 24H Fast Shipping</div>
+                <div class="flex items-center gap-2"><i class="fas fa-check text-geek-red"></i> Technical Support</div>
+            </div>
         </div>
     </div>
 
@@ -522,11 +550,6 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
         // Trigger animations when page loads
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.animate-fade-in-up').forEach(function(el) {
